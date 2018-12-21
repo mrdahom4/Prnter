@@ -51,72 +51,7 @@ client.user.setStatus("dnd")
 
 
  
-client.on('message', message => {
-           if (!message.channel.guild) return;
- 
-    let room = message.content.split(" ").slice(1);
-    let findroom = message.guild.channels.find('name', `${room}`)
-    if(message.content.startsWith(prefix + "setWelcomer")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-if(!room) return message.channel.send('Please Type The Channel Name')
-if(!findroom) return message.channel.send('Cant Find This Channel')
-let embed = new Discord.RichEmbed()
-.setTitle('**Done The Welcome Code Has Been Setup**')
-.addField('Channel:', `${room}`)
-.addField('Requested By:', `${message.author}`)
-.setThumbnail(message.author.avatarURL)
-.setFooter(`${client.user.username}`)
-message.channel.sendEmbed(embed)
-welcome[message.guild.id] = {
-channel: room,
-onoff: 'On',
-by: 'On',
-dm: 'Off'
-}
-fs.writeFile("./welcomer.json", JSON.stringify(welcome), (err) => {
-if (err) console.error(err)
-})
-    }})
-client.on('message', message => {
- 
-    if(message.content.startsWith(prefix + "toggleWelcome")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-        if(!welcome[message.guild.id]) welcome[message.guild.id] = {
-          onoff: 'Off'
-        }
-          if(welcome[message.guild.id].onff === 'Off') return [message.channel.send(`**The Welcome Is __𝐎𝐍__ !**`), welcome[message.guild.id].onoff = 'On']
-          if(welcome[message.guild.id].onoff === 'On') return [message.channel.send(`**The Welcome Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].onoff = 'Off']
-          fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
-            if (err) console.error(err)
-            .catch(err => {
-              console.error(err);
-          });
-            })
-          }
-         
-        })
-       
-        client.on('message', message => {
- 
-    if(message.content.startsWith(prefix + "toggleDmwelcome")) {
-        if(!message.channel.guild) return message.reply('**This Command Only For Servers**');
-        if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('**Sorry But You Dont Have Permission** `MANAGE_GUILD`' );
-        if(!welcome[message.guild.id]) welcome[message.guild.id] = {
-          dm: 'Off'
-        }
-          if(welcome[message.guild.id].dm === 'Off') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐍__ !**`), welcome[message.guild.id].dm = 'On']
-          if(welcome[message.guild.id].dm === 'On') return [message.channel.send(`**The Welcome Dm Is __𝐎𝐅𝐅__ !**`), welcome[message.guild.id].dm = 'Off']
-          fs.writeFile("./welcome.json", JSON.stringify(welcome), (err) => {
-            if (err) console.error(err)
-            .catch(err => {
-              console.error(err);
-          });
-            })
-          }
-         
-        })
+
  
         client.on('message', message => {
  
